@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Datos
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=Archivo
+comment2.target=void\ tiemposLeerDatos(java.lang.String)
+comment3.params=Archivo
+comment3.target=void\ tiemposDetectarColisiones(java.lang.String)
+comment4.params=nombreArchivo
+comment4.target=void\ leerYGuardarDatos(java.lang.String)
+comment5.params=
+comment5.target=void\ detectarColisiones()
+comment6.params=o
+comment6.target=void\ separacionOctantes(Octante)
+numComments=7
