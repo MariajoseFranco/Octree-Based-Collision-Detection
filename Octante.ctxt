@@ -2,4 +2,5 @@
 comment0.target=Octante
 comment1.params=maxX\ minX\ maxY\ minY\ maxZ\ minZ
 comment1.target=Octante(double,\ double,\ double,\ double,\ double,\ double)
+comment1.text=\r\n\ Este\ m\u00E9todo\ construye\ un\ objeto\ tipo\ octante\ \r\n\ @param\ double\ maxX\r\n\ @param\ double\ minX\r\n\ @param\ double\ maxY\r\n\ @param\ double\ minY\r\n\ @param\ double\ maxZ\r\n\ @param\ double\ minZ\r\n\ @return\ un\ nuevo\ objeto\ tipo\ octante\r\n
 numComments=2

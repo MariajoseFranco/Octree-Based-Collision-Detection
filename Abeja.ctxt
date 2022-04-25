@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.target=Abeja
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ abeja\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Esta\ clase\ permite\ crear\ objetos\ tipo\ Abeja\r\n\ @author\ (Mariajose\ Franco\ y\ Susana\ Alvarez)\r\n\ @version\ (Mayo\ 12,\ 2019)\r\n
 comment1.params=X\ Y\ Z
 comment1.target=Abeja(double,\ double,\ double)
+comment1.text=\r\nEste\ m\u00E9todo\ construye\ un\ objeto\ tipo\ Abeja\ \r\n@param\ double\ x\r\n@param\ double\ y\r\n@param\ double\ z\r\n@return\ Un\ nuevo\ objeto\ tipo\ abeja\r\n
 numComments=2

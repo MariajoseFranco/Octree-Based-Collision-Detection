@@ -1,9 +1,8 @@
 
 /**
- * Write a description of class Datos here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Esta clase permite leer datos, guardalos como abejas y detectar colisiones entre abejas 
+ * @author (Mariajose Franco, Susana Alvarez)
+ * @version (Mayo 12, 2019)
  */
 import java.util.*;
 import java.io.*;
@@ -12,82 +11,47 @@ import java.lang.Runtime;
 import java.lang.Long;
 public class Datos
 {
-    public static ArrayList <Abeja>abejas=new ArrayList<Abeja>();
-    public void main(String[]args){
-        //tiemposLeerDatos("4abejas.txt");
-        //tiemposDetectarColisiones("4abejas.txt");
-        //tiemposLeerDatos("15abejas.txt");
-        //tiemposDetectarColisiones("15abejas.txt");
-        //tiemposLeerDatos("150abejas.txt");
-        //tiemposDetectarColisiones("150abejas.txt");
-        //tiemposLeerDatos("1,500abejas.txt");
-        //tiemposDetectarColisiones("1,500abejas.txt");
-        //tiemposLeerDatos("15,000abejas.txt");
-        //tiemposDetectarColisiones("15,000abejas.txt");
-        //tiemposLeerDatos("150,000abejas.txt");
-        //tiemposDetectarColisiones("150,000abejas.txt");
-        //tiemposLeerDatos("1,500,000abejas.txt");
-        //tiemposDetectarColisiones("1,500,000abejas.txt");
-
+    public static LinkedList <Abeja>abejas=new  LinkedList<Abeja>();
+    public static Octante principal;
+    /**
+     * Este método permite ver cuanto se demora y cuanta memoria consume el programa detectando colisiones de abejas en diferentes archivos de diferente tamaño
+     */
+    public void main(){
+        //consumoDeMemoriaYTiempos("15abejas.txt");
+        //consumoDeMemoriaYTiempos("150abejas.txt");
+        //consumoDeMemoriaYTiempos("1,500abejas.txt");
+        //consumoDeMemoriaYTiempos("15,000abejas.txt");
+        //consumoDeMemoriaYTiempos("150,000abejas.txt");
+        //consumoDeMemoriaYTiempos("1,500,000abejas.txt");
+        //consumoDeMemoriaYTiempos("10abejas.txt");
+        //consumoDeMemoriaYTiempos("100abejas.txt");
+        //consumoDeMemoriaYTiempos("1,000abejas.txt");
+        //consumoDeMemoriaYTiempos("10,000abejas.txt");
+        //consumoDeMemoriaYTiempos("100,000abejas.txt");
+        //consumoDeMemoriaYTiempos("1,000,000abejas.txt");
     }
 
-    private void tiemposLeerDatos(String Archivo){
+    /**
+     * Este método permite ver cuanto se demora el programa detectando colisiones y cuanta memoria se consume
+     * @param String Archivo
+     */
+    private void consumoDeMemoriaYTiempos(String Archivo){
         long minTiempo=Long.MAX_VALUE;
         long maxTiempo=Long.MIN_VALUE;
         long minMemoria=Long.MAX_VALUE;
         long maxMemoria=Long.MIN_VALUE;;
         long sumaTiempos=0;
         long sumaMemoria=0;
-        for(int i=1; i<=100;i++){
+        for(int i=1; i<=10;i++){
             System.gc();
-            long startLectura = System.currentTimeMillis();
             leerYGuardarDatos(Archivo);
-            long endLectura = System.currentTimeMillis();
-            long tiempoFinal=endLectura-startLectura;
-            sumaTiempos=sumaTiempos+tiempoFinal;
-            Runtime m=Runtime.getRuntime();
-            long memoriaUsada=(m.totalMemory()-m.freeMemory());
-            sumaMemoria=memoriaUsada+sumaMemoria;
-            if(tiempoFinal<minTiempo){
-                minTiempo=tiempoFinal;
-            }
-            if(tiempoFinal>maxTiempo){
-                maxTiempo=tiempoFinal;
-            }
-            if(memoriaUsada<minMemoria){
-                minMemoria=memoriaUsada;
-            }
-            if(memoriaUsada>maxMemoria){
-                maxMemoria=memoriaUsada;
-            }
-        }
-        long tiempoPromedio=sumaTiempos/100;
-        long memoriaPromedio=sumaMemoria/100;
-        System.out.println("tiempo promedio en guardar datos:"+ (tiempoPromedio+" milisegundos"));
-        System.out.println("tiempo máximo en guardar datos:"+ (maxTiempo+" milisegundos"));
-        System.out.println("tiempo mínimo en guardar datos:"+ (minTiempo+" milisegundos"));
-        System.out.println("promedio de memoria gastada en guardar datos:"+memoriaPromedio+" bytes");
-        System.out.println("máxima memoria gastada en guardar datos:"+maxMemoria+" bytes"); 
-        System.out.println("mínima memoria gastada en guardar datos:"+minMemoria+" bytes");
-    }
-
-    private void tiemposDetectarColisiones(String Archivo){
-        long minTiempo=Long.MAX_VALUE;
-        long maxTiempo=Long.MIN_VALUE;
-        long minMemoria=Long.MAX_VALUE;
-        long maxMemoria=Long.MIN_VALUE;;
-        long sumaTiempos=0;
-        long sumaMemoria=0;
-        for(int i=1; i<=100;i++){
-            leerYGuardarDatos(Archivo);
-            System.gc();
             long startLectura = System.currentTimeMillis();
             detectarColisiones();
             long endLectura = System.currentTimeMillis();
             long tiempoFinal=endLectura-startLectura;
-            sumaTiempos=sumaTiempos+tiempoFinal;
             Runtime m=Runtime.getRuntime();
             long memoriaUsada=(m.totalMemory()-m.freeMemory());
+            sumaTiempos=sumaTiempos+tiempoFinal;
             sumaMemoria=memoriaUsada+sumaMemoria;
             if(tiempoFinal<minTiempo){
                 minTiempo=tiempoFinal;
@@ -102,22 +66,31 @@ public class Datos
                 maxMemoria=memoriaUsada;
             }
         }
-        long tiempoPromedio=sumaTiempos/100;
-        long memoriaPromedio=sumaMemoria/100;
+        long tiempoPromedio=sumaTiempos/10;
+        long memoriaPromedio=sumaMemoria/10;
         System.out.println("tiempo promedio en detectar colisiones:"+ (tiempoPromedio+" milisegundos"));
-        System.out.println("tiempo máximo en guardar detectar colisiones:"+ (maxTiempo+" milisegundos"));
-        System.out.println("tiempo mínimo en guardar detectar colisiones:"+ (minTiempo+" milisegundos"));
+        System.out.println("tiempo máximo en detectar colisiones:"+ (maxTiempo+" milisegundos"));
+        System.out.println("tiempo mínimo en detectar colisiones:"+ (minTiempo+" milisegundos"));
         System.out.println("promedio de memoria gastada en detectar colisiones:"+memoriaPromedio+" bytes");
         System.out.println("máxima memoria gastada en detectar colisiones:"+maxMemoria+" bytes"); 
         System.out.println("mínima memoria gastada en detectar colisiones:"+minMemoria+" bytes");
     }
 
+
+    /**
+     * Este método lee un archivo con datos y los guarda en un linkedList de objetos tipo abeja.También se encuentra el máximo y mínimo en x,y, z del espacio donde estan las abejas 
+     * @param String nombreArchivo
+     */
     public void leerYGuardarDatos(String nombreArchivo){
         try{
 
             BufferedReader br=new BufferedReader(new FileReader(nombreArchivo));
             String linea=br.readLine();
             linea=br.readLine();
+            String[]c=linea.split(",");
+            double Xmax=Double.parseDouble(c[0]);double Xmin=Double.parseDouble(c[0]);
+            double Ymax=Double.parseDouble(c[1]);double Ymin=Double.parseDouble(c[1]);
+            double Zmax=Double.parseDouble(c[2]);double Zmin=Double.parseDouble(c[2]);  
 
             while(linea!=null){
                 String[]cadena=linea.split(",");
@@ -126,8 +99,30 @@ public class Datos
                 double z=Double.parseDouble(cadena[2]);
                 Abeja a=new Abeja(x,y,z);
                 abejas.add(a);
+
+                if(x>Xmax){
+                    Xmax=x;
+                }
+                if(y>Ymax){
+                    Ymax=y;
+                }
+                if(z>Zmax){
+                    Zmax=z; 
+                }
+                if(x<Xmin){
+                    Xmin=x;
+                }
+                if(y<Ymin){
+                    Ymin=y;
+                }
+                if(z<Zmin){
+                    Zmin=z;
+                }     
                 linea=br.readLine();
             }
+            principal=new Octante(Xmax,Xmin,Ymax,Ymin,Zmax,Zmin);
+            principal.a=abejas;
+
         }
         catch(IOException ioe){
             System.out.println("el archivo no existe");
@@ -135,56 +130,25 @@ public class Datos
 
     }
 
-    public void detectarColisiones(){
-        double Xmax=abejas.get(0).x;double Xmin=abejas.get(0).x;
-        double Ymax=abejas.get(0).y;double Ymin=abejas.get(0).y;
-        double Zmax=abejas.get(0).z;double Zmin=abejas.get(0).z;   
-        for(int i=0;i<abejas.size();i++){
-            double x=abejas.get(i).x;
-            double y=abejas.get(i).y;
-            double z=abejas.get(i).z;
-
-            if(x>Xmax){
-                Xmax=x;
-            }
-            if(y>Ymax){
-                Ymax=y;
-            }
-            if(z>Zmax){
-                Zmax=z; 
-            }
-            if(x<Xmin){
-                Xmin=x;
-            }
-            if(y<Ymin){
-                Ymin=y;
-            }
-            if(z<Zmin){
-                Zmin=z;
-            }     
-        }
-        Octante principal=new Octante(Xmax,Xmin,Ymax,Ymin,Zmax,Zmin);
-        principal.a=abejas;
-        principal.padre=null;
-
-        separacionOctantes(principal);
+    /**
+     * Este método permite detectar colisiones entre las abejas
+     */
+    public void detectarColisiones(){// llama al metodo 
+        deteccionColisiones(principal);
     }
 
-    private void separacionOctantes(Octante o){
-        double maxX=o.Xmax;double minX=o.Xmin;
-        double maxY=o.Ymax;double minY=o.Ymin;
-        double maxZ=o.Zmax;double minZ=o.Zmin;
+    /**
+     * Este método permite separar un octante en otros 8 octantes hasta encontrar las abejas que van a colisionar
+     * @param Octante o
+     */
+    private void deteccionColisiones(Octante o){
 
-        double Xmitad=Math.abs(maxX-minX)/2+minX;
-        double Ymitad=Math.abs(maxY-minY)/2+minY;
-        double Zmitad=Math.abs(maxZ-minZ)/2+minZ;
         boolean entro=false;
 
-        if(Math.sqrt((maxX-minX)*(maxX-minX)+(maxY-minY)*(maxY-minY)+(maxZ-minZ)*(maxZ-minZ))<=100&&entro==false||o.a.size()<=1){
+        if(Math.sqrt((o.Xmax-o.Xmin)*(o.Xmax-o.Xmin)+((o.Ymax-o.Ymin))*(o.Ymax-o.Ymin)+(o.Zmax-o.Zmin)*(o.Zmax-o.Zmin))<=100&&entro==false||o.a.size()<=1){
             if(o.a.size()>=2){
-                for(int j=0; j<o.a.size();j++){
-                    Abeja a=o.a.get(j);
-                    System.out.println("La abeja con coordenadas "+a.x+","+a.y+","+a.z+" esta en riesgo de colision");
+                for(Abeja a:o.a){
+                    System.out.println("The bee with coordinates "+a.x+","+a.y+","+a.z+" is in risk of colision");
 
                 }
 
@@ -192,10 +156,9 @@ public class Datos
             else if(o.a.size()==1){
                 Abeja a1= o.a.get(0);
                 if(o.padre!=null){
-                    for(int i=0; i<o.padre.a.size(); i++){
-                        Abeja a2=o.padre.a.get(i);
-                        if(Math.sqrt((a1.x-a2.x)*(a1.x-a2.x)+(a1.y-a2.y)*(a1.y-a2.y)+(a1.z-a2.z)*(a1.z-a2.z))<=100&&Math.sqrt((a1.x-a2.x)*(a1.x-a2.x)+(a1.y-a2.y)*(a1.y-a2.y)+(a1.z-a2.z)*(a1.z-a2.z))!=0){
-                            System.out.println("La abeja con coordenadas "+a1.x+","+a1.y+","+a1.z+" esta en riesgo de colision");
+                    for(Abeja a:o.padre.a){
+                        if(Math.sqrt((a1.x-a.x)*(a1.x-a.x)+(a1.y-a.y)*(a1.y-a.y)+(a1.z-a.z)*(a1.z-a.z))<=100&&Math.sqrt((a1.x-a.x)*(a1.x-a.x)+(a1.y-a.y)*(a1.y-a.y)+(a1.z-a.z)*(a1.z-a.z))!=0){
+                            System.out.println("The bee with coordinates "+a1.x+","+a1.y+","+a1.z+" is in risk of colision");//si esto pasa la abeja original esta en rieso de colision
                             break;
                         }
 
@@ -205,60 +168,55 @@ public class Datos
 
             }
             else{
-
             }
-            entro=true;
+            entro=true; 
         }
 
         else{
-            Octante s1=new Octante(maxX,Xmitad,maxY,Ymitad, maxZ,Zmitad);//+,+,+
-            Octante s2=new Octante(Xmitad,minX,maxY,Ymitad, maxZ,Zmitad);//-,+,+
-            Octante s3=new Octante(Xmitad,minX,Ymitad,minY, maxZ,Zmitad);//-,-,+
-            Octante s4=new Octante(maxX,Xmitad,Ymitad,minY, maxZ,Zmitad);//+,-,+
-            Octante s5=new Octante(maxX,Xmitad,maxY,Ymitad, Zmitad,minZ);//+,+,-
-            Octante s6=new Octante(Xmitad,minX,maxY,Ymitad, Zmitad,minZ);//-,+,-
-            Octante s7=new Octante(Xmitad,minX,Ymitad,minY, Zmitad,minZ);//-,-,-
-            Octante s8=new Octante(maxX,Xmitad,Ymitad,minY, Zmitad,minZ);//+,-,-
+            double Xmitad=Math.abs(o.Xmax-o.Xmin)/2+o.Xmin;
+            double Ymitad=Math.abs(o.Ymax-o.Ymin)/2+o.Ymin;
+            double Zmitad=Math.abs(o.Zmax-o.Zmin)/2+o.Zmin;
+            Octante s1=new Octante(o.Xmax,Xmitad,o.Ymax,Ymitad, o.Zmax,Zmitad);//+,+,+
+            Octante s2=new Octante(Xmitad,o.Xmin,o.Ymax,Ymitad, o.Zmax,Zmitad);//-,+,+
+            Octante s3=new Octante(Xmitad,o.Xmin,Ymitad,o.Ymin, o.Zmax,Zmitad);//-,-,+
+            Octante s4=new Octante(o.Xmax,Xmitad,Ymitad,o.Ymin, o.Zmax,Zmitad);//+,-,+
+            Octante s5=new Octante(o.Xmax,Xmitad,o.Ymax,Ymitad, Zmitad,o.Zmin);//+,+,-
+            Octante s6=new Octante(Xmitad,o.Xmin,o.Ymax,Ymitad, Zmitad,o.Zmin);//-,+,-
+            Octante s7=new Octante(Xmitad,o.Xmin,Ymitad,o.Ymin, Zmitad,o.Zmin);//-,-,-
+            Octante s8=new Octante(o.Xmax,Xmitad,Ymitad,o.Ymin, Zmitad,o.Zmin);//+,-,-
             s1.padre=o;s2.padre=o;s3.padre=o;s4.padre=o;s5.padre=o;s6.padre=o;s7.padre=o;s8.padre=o;
 
-            for(int i=0; i<o.a.size();i++){
-                Abeja a1= o.a.get(i);
-                double x=a1.x;
-                double y=a1.y;
-                double z=a1.z;
+            for(Abeja a:o.a){
+                double x=a.x;
+                double y=a.y;
+                double z=a.z;
                 if(x>Xmitad&& y>Ymitad &&z>Zmitad){
-                    s1.a.add(a1);
+                    s1.a.add(a);
                 }
                 if(x<Xmitad&& y>Ymitad &&z>Zmitad){
-                    s2.a.add(a1);
+                    s2.a.add(a);
                 }
                 if(x<Xmitad&& y<Ymitad &&z>Zmitad){
-                    s3.a.add(a1);
+                    s3.a.add(a);
                 }
                 if(x>Xmitad&& y<Ymitad &&z>Zmitad){
-                    s4.a.add(a1);
+                    s4.a.add(a);
                 }
                 if(x>Xmitad&& y>Ymitad &&z<Zmitad){
-                    s5.a.add(a1);
+                    s5.a.add(a);
                 }
                 if(x<Xmitad&& y>Ymitad &&z<Zmitad){
-                    s6.a.add(a1);
+                    s6.a.add(a);
                 }
                 if(x<Xmitad&& y<Ymitad &&z<Zmitad){
-                    s7.a.add(a1);
+                    s7.a.add(a);
                 }
                 if(x>Xmitad&& y<Ymitad &&z<Zmitad){
-                    s8.a.add(a1);
+                    s8.a.add(a);
                 }
             }
-            separacionOctantes(s1);
-            separacionOctantes(s2);
-            separacionOctantes(s3);
-            separacionOctantes(s4);
-            separacionOctantes(s5);
-            separacionOctantes(s6);
-            separacionOctantes(s7);
-            separacionOctantes(s8);
+            deteccionColisiones(s1);deteccionColisiones(s2);deteccionColisiones(s3);deteccionColisiones(s4); 
+            deteccionColisiones(s5);deteccionColisiones(s6);deteccionColisiones(s7);deteccionColisiones(s8);
 
         }
     }

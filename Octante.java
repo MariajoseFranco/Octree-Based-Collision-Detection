@@ -1,14 +1,13 @@
 
 /**
- * Write a description of class Octantes here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Esta clase permite crear objetos tipo Octante
+ * @author (Mariajose Franco y Susana Alvarez)
+ * @version (Mayo 12,2019)
  */
 import java.util.*;
 public class Octante
 {
-    ArrayList<Abeja> a= new ArrayList<Abeja>();
+    LinkedList<Abeja> a= new  LinkedList<Abeja>();
     double Xmax;
     double Xmin;
     double Ymax;
@@ -16,16 +15,24 @@ public class Octante
     double Zmax;
     double Zmin;
     Octante padre;
+    /**
+     * Este método construye un objeto tipo octante 
+     * @param double maxX
+     * @param double minX
+     * @param double maxY
+     * @param double minY
+     * @param double maxZ
+     * @param double minZ
+     * @return un nuevo objeto tipo octante
+     */
     public Octante(double maxX, double minX,double maxY, double minY,double maxZ, double minZ ){
-    Xmax=maxX;
-    Xmin=minX;
-    Ymax=maxY;
-    Ymin=minY;
-    Zmax=maxZ;
-    Zmin=minZ;
+        Xmax=maxX;
+        Xmin=minX;
+        Ymax=maxY;
+        Ymin=minY;
+        Zmax=maxZ;
+        Zmin=minZ;
     }
-    
-  
-    
+
     
 }
